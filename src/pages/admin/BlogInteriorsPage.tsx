@@ -99,7 +99,7 @@ export default function BlogInteriorsPage() {
 
     setDeleting(true);
     try {
-      const result = await blogApi.delete(blogToDelete);
+      const result = await blogApi.delete(blogToDelete, 'lb_interiors');
       
       if (result.success) {
         toast({

@@ -32,7 +32,7 @@ export default function EditBlogServicesPage() {
         return;
       }
 
-      const data = await blogApi.getById(blogId);
+      const data = await blogApi.getById(blogId, 'lb_services');
       
       if (data.success && data.blog) {
         setBlogData({

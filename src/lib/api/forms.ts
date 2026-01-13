@@ -105,19 +105,20 @@ export const blogApi = {
     return response.json();
   },
 
-  delete: async (blogId: number) => {
+  delete: async (blogId: number, site: 'lb_services' | 'lb_interiors') => {
     const response = await fetch(`${API_BASE_URL}/blog/${blogId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${authApi.getToken()}`,
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ blog_site: site }),
     });
     return response.json();
   },
 
-  getById: async (blogId: number) => {
-    const response = await fetch(`${API_BASE_URL}/blog/${blogId}`, {
+  getById: async (blogId: number, site: 'lb_services' | 'lb_interiors') => {
+    const response = await fetch(`${API_BASE_URL}/blog/${blogId}?blog_site=${site}`, {
       headers: {
         'Authorization': `Bearer ${authApi.getToken()}`,
       },
