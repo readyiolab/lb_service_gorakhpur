@@ -99,7 +99,31 @@ export default function BlogServicesPage() {
 
     setDeleting(true);
     try {
-      const result = await blogApi.delete(blogToDelete, 'lb_services');
+      // Ensure blog_id is a number
+      const blogId = typeof blogToDelete === 'string' ? parseInt(blogToDelete, 10) : blogToDelete;
+      
+      // Verify blog exists in current list before deleting
+      const blogToDeleteObj = blogs.find(b => b.blog_id === blogToDelete);
+      if (!blogToDeleteObj) {
+        toast({
+          title: 'Error',
+          description: 'Blog post not found in current list. Please refresh the page.',
+          variant: 'destructive',
+        });
+        await fetchBlogs();
+        return;
+      }
+      
+      console.log('Attempting to delete blog:', {
+        blogToDelete,
+        blogId,
+        blogToDeleteObj,
+        site: 'lb_services'
+      });
+      
+      const result = await blogApi.delete(blogId, 'lb_services');
+      
+      console.log('Delete result:', result);
       
       if (result.success) {
         toast({
@@ -108,6 +132,8 @@ export default function BlogServicesPage() {
         });
         // Remove the deleted blog from the state
         setBlogs(blogs.filter(b => b.blog_id !== blogToDelete));
+        // Refresh the list to ensure consistency
+        await fetchBlogs();
       } else {
         toast({
           title: 'Error',
@@ -116,6 +142,7 @@ export default function BlogServicesPage() {
         });
       }
     } catch (error) {
+      console.error('Delete error:', error);
       toast({
         title: 'Error',
         description: 'Failed to delete blog post',
@@ -192,7 +219,7 @@ export default function BlogServicesPage() {
                         <Button 
                           variant="outline" 
                           size="sm"
-                          onClick={() => handleEditClick(blog.blog_id)}
+                          onClick={() => handleEditClick(Number(blog.blog_id))}
                         >
                           Edit
                         </Button>
@@ -200,7 +227,7 @@ export default function BlogServicesPage() {
                           variant="outline" 
                           size="sm" 
                           className="text-destructive"
-                          onClick={() => handleDeleteClick(blog.blog_id)}
+                          onClick={() => handleDeleteClick(Number(blog.blog_id))}
                         >
                           Delete
                         </Button>

@@ -106,24 +106,36 @@ export const blogApi = {
   },
 
   delete: async (blogId: number, site: 'lb_services' | 'lb_interiors') => {
-    const response = await fetch(`${API_BASE_URL}/blog/${blogId}`, {
+    // Ensure blogId is a number and convert to string for URL
+    const blogIdStr = String(blogId);
+    const url = `${API_BASE_URL}/blog/${blogIdStr}?blog_site=${site}`;
+    
+    console.log('Delete request:', { blogId, blogIdStr, site, url });
+    
+    const response = await fetch(url, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${authApi.getToken()}`,
-        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ blog_site: site }),
     });
-    return response.json();
+    
+    const result = await response.json();
+    console.log('Delete response:', result);
+    
+    return result;
   },
 
   getById: async (blogId: number, site: 'lb_services' | 'lb_interiors') => {
-    const response = await fetch(`${API_BASE_URL}/blog/${blogId}?blog_site=${site}`, {
-      headers: {
-        'Authorization': `Bearer ${authApi.getToken()}`,
-      },
-    });
-    return response.json();
+    // Since backend doesn't have getById, we fetch all blogs and filter by ID
+    const data = await blogApi.getAll(site);
+    if (data.success && data.blogs) {
+      const blog = data.blogs.find((b: any) => b.blog_id === blogId);
+      if (blog) {
+        return { success: true, blog };
+      }
+      return { success: false, message: 'Blog not found' };
+    }
+    return { success: false, message: data.message || 'Failed to fetch blogs' };
   },
 
   getAll: async (site?: 'lb_services' | 'lb_interiors') => {
