@@ -24,7 +24,7 @@ const serviceData: Record<string, {
       "AC Maintenance Service",
     ],
     brands: ["LG", "Samsung", "Voltas", "Daikin", "Hitachi", "Whirlpool", "Blue Star", "Carrier", "Godrej"],
-    priceRange: "₹99 - ₹2,999",
+    priceRange: "₹299 - ₹2,999",
     warranty: "30-90 Days",
   },
   "electrician": {
@@ -38,7 +38,7 @@ const serviceData: Record<string, {
       "Light Fitting",
       "Inverter & UPS Installation",
     ],
-    priceRange: "₹99 - ₹999",
+    priceRange: "₹299 - ₹999",
     warranty: "30 Days",
   },
   "plumber": {
@@ -52,7 +52,7 @@ const serviceData: Record<string, {
       "Water Tank Cleaning",
       "Bathroom Fitting",
     ],
-    priceRange: "₹99 - ₹1,499",
+    priceRange: "₹299 - ₹1,499",
     warranty: "30 Days",
   },
   "home-cleaning": {
@@ -80,7 +80,7 @@ const serviceData: Record<string, {
       "Carpet Drying",
       "Pet Stain Treatment",
     ],
-    priceRange: "₹99 - ₹1,999",
+    priceRange: "₹299 - ₹1,999",
     warranty: "Service Guarantee",
   },
   "ro-service": {
@@ -95,7 +95,7 @@ const serviceData: Record<string, {
       "New RO Installation",
     ],
     brands: ["Kent", "Aquaguard", "Livpure", "Pureit", "Blue Star", "Havells"],
-    priceRange: "₹99 - ₹2,499",
+    priceRange: "₹299 - ₹2,499",
     warranty: "30-90 Days",
   },
   "pest-control": {
@@ -123,7 +123,7 @@ const serviceData: Record<string, {
       "Quick Wash Service",
       "Fleet Washing",
     ],
-    priceRange: "₹99 - ₹499",
+    priceRange: "₹299 - ₹499",
     warranty: "Same Day Service",
   },
   "car-detailing": {
@@ -390,7 +390,7 @@ const defaultService = {
     "Quality Guarantee",
     "Post-Service Support",
   ],
-  priceRange: "₹99 onwards",
+  priceRange: "₹299 onwards",
   warranty: "Service Warranty",
 };
 

@@ -90,7 +90,7 @@ const Services = () => {
         <title>All Services | LB Services Gorakhpur - Complete Home Services</title>
         <meta 
           name="description" 
-          content="Explore all home services offered by LB Services Gorakhpur - AC repair, electrician, plumber, cleaning, pest control, movers & packers, event management, and more. Services starting from ₹99." 
+          content="Explore all home services offered by LB Services Gorakhpur - AC repair, electrician, plumber, cleaning, pest control, movers & packers, event management, and more. Services starting from ₹299." 
         />
       </Helmet>
       
@@ -110,7 +110,7 @@ const Services = () => {
                 All services come with verified technicians and service warranty.
               </p>
               <p className="text-2xl font-bold text-primary">
-                Services Starting from ₹99/-
+                Services Starting from ₹299/-
               </p>
             </div>
           </div>

@@ -9,7 +9,7 @@ const Hero = () => {
           <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap text-center">
             <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 animate-pulse flex-shrink-0" />
             <span className="text-xs sm:text-sm md:text-base font-bold">
-              Limited Time Offer: Starting Price ₹99 | Visiting Charge ₹99
+              Limited Time Offer: Starting Price ₹299 | Visiting Charge ₹299
             </span>
             <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-300 animate-pulse flex-shrink-0" />
           </div>
@@ -88,11 +88,11 @@ const Hero = () => {
           {/* Offer Cards */}
           <div className="grid grid-cols-3 gap-3 sm:gap-4 mt-8 sm:mt-12 bg-white/10 backdrop-blur-sm p-4 sm:p-6 rounded-xl border border-white/20">
             <div className="text-center">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-500 mb-1">₹99</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-500 mb-1">₹299</div>
               <div className="text-[10px] sm:text-xs md:text-sm text-gray-300">Starting Price</div>
             </div>
             <div className="text-center border-l border-r border-white/30">
-              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-500 mb-1">₹99</div>
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-500 mb-1">₹299</div>
               <div className="text-[10px] sm:text-xs md:text-sm text-gray-300">Visiting Charge</div>
             </div>
             <div className="text-center">
