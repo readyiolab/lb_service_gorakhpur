@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ea580c" />
+    <!-- Performance Preconnect & Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preload" href="/hero.webp" as="image" fetchpriority="high" />
+    <link rel="preload" href="/logo.webp" as="image" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Libre+Caslon+Text:wght@400;700&display=swap" rel="stylesheet" />
+    
+    <title>Home Services in Gorakhpur | AC, Electrician, Plumber, Cleaning – LB Services</title>
+    <meta name="description" content="LB Services Gorakhpur offers AC repair, plumbing, electrician, appliance repair, cleaning, car repair, interior designing & more. Book verified technicians at your doorstep." />
+    <meta name="keywords" content="home services gorakhpur, ac repair gorakhpur, plumber in gorakhpur, electrician in gorakhpur, home cleaning gorakhpur, appliance repair gorakhpur" />
+    <meta name="author" content="LB Services Gorakhpur" />
+    <link rel="canonical" href="https://lbservicesgorakhpur.com" />
+    <meta name="google-site-verification" content="YZcrw1-Yp0GQNu9Uh2NDmpHn5g98Zoa9Gfimf9RIgrM" />
+    <meta property="og:title" content="Home Services in Gorakhpur | LB Services" />
+    <meta property="og:description" content="LB Services Gorakhpur offers AC repair, plumbing, electrician, appliance repair, cleaning & more. Book verified technicians at your doorstep." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lbservicesgorakhpur.com" />
+    <meta property="og:image" content="https://lbservicesgorakhpur.com/og-image.jpg" />
+    <meta property="og:locale" content="en_IN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Home Services in Gorakhpur | LB Services" />
+    <meta name="twitter:description" content="Professional home services at your doorstep. AC repair, electrician, plumber, cleaning & more." />
+    <meta name="twitter:image" content="https://lbservicesgorakhpur.com/og-image.jpg" />
+    
+    <!-- Delayed GTM Injection (Boosts Performance Score) -->
+    <script>
+      (function() {
+        var gtmLoaded = false;
+        function loadGTM() {
+          if (gtmLoaded) return;
+          gtmLoaded = true;
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = "https://www.googletagmanager.com/gtag/js?id=AW-17801615139";
+          document.head.appendChild(script);
+          
+          script.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17801615139');
+          };
+        }
+        
+        // Load after 3.5 seconds or on first interaction
+        var gtmTimeout = setTimeout(loadGTM, 3500);
+        ['mousedown', 'mousemove', 'touchstart', 'scroll', 'keydown'].forEach(function(e) {
+          window.addEventListener(e, function() {
+            clearTimeout(gtmTimeout);
+            loadGTM();
+          }, { once: true });
+        });
+      })();
+    </script>
+
+    <meta name="robots" content="index, follow" />
+    <meta name="geo.region" content="IN-UP" />
+    <meta name="geo.placename" content="Gorakhpur" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
