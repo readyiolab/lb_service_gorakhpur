@@ -11,8 +11,16 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Trash2 } from 'lucide-react';
+import { Loader2, Eye, Trash2 } from 'lucide-react';
 import { contactApi } from '@/lib/api/forms';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,6 +38,8 @@ interface Contact {
   contact_email?: string;
   contact_phone: string;
   contact_service?: string;
+  contact_location?: string;
+  contact_message?: string;
   contact_status: string;
   created_at: string;
 }
@@ -38,6 +48,8 @@ export default function ContactServicesPage() {
   const { toast } = useToast();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+  const [viewDialogOpen, setViewDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [contactToDelete, setContactToDelete] = useState<number | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -75,14 +87,21 @@ export default function ContactServicesPage() {
       case 'new':
         return 'bg-blue-100 text-blue-800';
       case 'in_progress':
+      case 'contacted':
         return 'bg-yellow-100 text-yellow-800';
       case 'completed':
+      case 'resolved':
         return 'bg-green-100 text-green-800';
       case 'closed':
         return 'bg-gray-100 text-gray-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const handleViewClick = (contact: Contact) => {
+    setSelectedContact(contact);
+    setViewDialogOpen(true);
   };
 
   const handleDeleteClick = (contactId: number) => {
@@ -181,7 +200,14 @@ export default function ContactServicesPage() {
                     <TableCell>
                       {new Date(contact.created_at).toLocaleDateString()}
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="flex items-center gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleViewClick(contact)}
+                      >
+                        <Eye className="w-4 h-4 mr-1" /> View
+                      </Button>
                       <Button 
                         variant="destructive" 
                         size="sm"
@@ -198,6 +224,76 @@ export default function ContactServicesPage() {
         </CardContent>
       </Card>
 
+      {/* View Details Modal */}
+      <Dialog open={viewDialogOpen} onOpenChange={setViewDialogOpen}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>Inquiry Details</DialogTitle>
+            <DialogDescription>
+              Submitted on {selectedContact ? new Date(selectedContact.created_at).toLocaleString() : ''}
+            </DialogDescription>
+          </DialogHeader>
+          {selectedContact && (
+            <div className="space-y-4 text-sm">
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <span className="font-semibold text-muted-foreground">Name:</span>
+                  <p className="font-medium text-foreground">{selectedContact.contact_name}</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-muted-foreground">Phone:</span>
+                  <p className="font-medium text-foreground">
+                    <a href={`tel:${selectedContact.contact_phone}`} className="text-primary hover:underline">
+                      {selectedContact.contact_phone}
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <span className="font-semibold text-muted-foreground">Service:</span>
+                  <p className="font-medium text-foreground">{selectedContact.contact_service || '-'}</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-muted-foreground">Email:</span>
+                  <p className="font-medium text-foreground">{selectedContact.contact_email || '-'}</p>
+                </div>
+              </div>
+
+              {selectedContact.contact_location && (
+                <div>
+                  <span className="font-semibold text-muted-foreground">Location:</span>
+                  <p className="font-medium text-foreground">{selectedContact.contact_location}</p>
+                </div>
+              )}
+
+              <div>
+                <span className="font-semibold text-muted-foreground">Status:</span>
+                <div className="mt-1">
+                  <Badge className={getStatusColor(selectedContact.contact_status)}>
+                    {selectedContact.contact_status}
+                  </Badge>
+                </div>
+              </div>
+
+              <div>
+                <span className="font-semibold text-muted-foreground">Inquiry Message / Details:</span>
+                <div className="mt-1.5 max-h-60 overflow-y-auto rounded-md border bg-muted/50 p-3 text-sm leading-relaxed whitespace-pre-wrap">
+                  {selectedContact.contact_message || selectedContact.contact_service || 'No additional message.'}
+                </div>
+              </div>
+            </div>
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setViewDialogOpen(false)}>
+              Close
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Modal */}
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -228,3 +324,4 @@ export default function ContactServicesPage() {
     </div>
   );
 }
+
